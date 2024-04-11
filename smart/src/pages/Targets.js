@@ -33,7 +33,7 @@ export default function Targets(){
     const navigate = useNavigate();
     
     const handleLogout = () => {
-        navigate('/login');
+        navigate('/');
     };
     
 

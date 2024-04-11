@@ -9,7 +9,7 @@ const AdminPage = () => {
         // Perform logout logic here
         // For example, clear local storage, reset state, etc.
         // Then navigate to the logout page or perform any other necessary action
-        navigate('/login');
+        navigate('/');
     };
 
     return (
