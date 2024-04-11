@@ -1,0 +1,74 @@
+/* SidebarPage.css */
+
+.sidebar-page {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-color: #F5F5F5; /* Light gray background */
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #7F3B8B; /* Dark purple for sidebar */
+  color: #fff; /* White text for contrast */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; /* Remove default margin */
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  color: #fff; /* White text for contrast */
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+.logout-btn {
+  margin-top: auto; /* Push the button to the bottom */
+  background-color: #7F3B8B; /* Dark purple button color */
+  color: #fff; /* White button text */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px; /* Rounded corners for button */
+  cursor: pointer; /* Indicate clickable button */
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff; /* White background for content */
+}
+
+.content h1 {
+  margin-bottom: 20px; /* Add some space below the heading */
+}
+
+/* Adjust iframe styles (optional) */
+
+iframe {
+  border: none; /* Remove default iframe border */
+}
