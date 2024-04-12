@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/User";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setName, setRole } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -22,8 +24,15 @@ export default function LoginPage() {
         .then(function (response) {
           console.log(response);
           //console.log(response.data);
-          if (response.data.is_admin === true) navigate("/AdminPage");
-          else navigate("/consultant");
+          if (response.data.is_admin === true) {
+            setRole("admin");
+            setName(response.data.name);
+            navigate("/AdminPage");
+          } else {
+            setRole("consultant");
+            setName(response.data.name);
+            navigate("/ConsultantPage");
+          }
         })
         .catch(function (error) {
           console.log(error, "error");
@@ -41,7 +50,7 @@ export default function LoginPage() {
   ];
 
   return (
-    <div className="flex w-full h-full items-center justify-center">
+    <div className="flex w-full h-full items-center justify-center my-12">
       <div className="flex flex-col items-center p-16 gap-4 border rounded-2xl bg-lighsilver w-fit border-primary-200 shadow-2xl shadow-primary-200">
         <img src={imgs[0]} alt="Logo" className="w-40 rounded-lg" />
         <div>

@@ -23,62 +23,78 @@ export default function CreateUser() {
     event.preventDefault();
 
     // Email validation regex pattern
-  const emailPattern = /\S+@\S+\.\S+/;
+    const emailPattern = /\S+@\S+\.\S+/;
 
-  if (!emailPattern.test(inputs.email)) {
-    alert("Please enter a valid email address.");
-    return;
-  }
+    if (!emailPattern.test(inputs.email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
 
-    axios.post("http://127.0.0.1:5000/signup", inputs).then(function (response) {
-      console.log(response.data);
-      navigate("/Users");
-    });
+    axios
+      .post("http://127.0.0.1:5000/signup", inputs)
+      .then(function (response) {
+        console.log(response.data);
+        navigate("/Users");
+      });
   };
 
   return (
-    <div>
-      <div className="container h-100">
-        <div className="row">
-          <div className="col-2"></div>
-          <div className="col-8">
-            <h1>Create user</h1>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label>Email</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="email"
-                  value={inputs.email}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-outline mb-3">
-                <label>Password</label>
-                <input
-                  type="password"
-                  value={inputs.password}
-                  onChange={(e) => setInputs((prevInputs) => ({ ...prevInputs, password: e.target.value }))}
-                  className="form-control form-control-lg"
-                  placeholder="Enter password"
-                />
-              </div>
-              <div className="mb-3">
-                <label>Is Admin</label>
-                <select name="full_Access" id="lang" onChange={handleChange} value={inputs.full_Access}>
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
-                </select>
-              </div>
-              <button type="submit" name="add" className="btn btn-primary">
-                Save
-              </button>
-            </form>
-          </div>
-          <div className="col-2"></div>
+    <div className="flex flex-col h-full p-8 gap-4 items-center">
+      <h1 className="text-2xl font-bold mb-4">Create user</h1>
+      <form onSubmit={handleSubmit} className="w-2/4">
+        <div className="mb-4">
+          <label className="block my-4" htmlFor="email">
+            Email
+          </label>
+          <input
+            type="text"
+            className="w-full rounded-md border border-primary-500 p-2"
+            name="email"
+            value={inputs.email}
+            onChange={handleChange}
+            placeholder="Enter email"
+          />
         </div>
-      </div>
+        <div className="mb-4">
+          <label className="block my-4" htmlFor="password">
+            Password
+          </label>
+          <input
+            type="password"
+            value={inputs.password}
+            onChange={(e) =>
+              setInputs((prevInputs) => ({
+                ...prevInputs,
+                password: e.target.value,
+              }))
+            }
+            className=" w-full rounded-md border border-primary-500 p-2"
+            placeholder="Enter password"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block my-4" htmlFor="full_Access">
+            Is Admin
+          </label>
+          <select
+            name="full_Access"
+            id="lang"
+            onChange={handleChange}
+            value={inputs.full_Access}
+            className="w-full rounded-md border border-primary-500 p-2"
+          >
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+        <button
+          type="submit"
+          name="add"
+          className="bg-green hover:bg-primary-400 w-full text-white font-bold py-2 rounded-md mt-8"
+        >
+          Save
+        </button>
+      </form>
     </div>
   );
 }

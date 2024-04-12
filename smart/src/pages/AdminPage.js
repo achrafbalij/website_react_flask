@@ -34,10 +34,7 @@ const AdminPage = () => {
   };
 
   return (
-    <div>
-      <div>
-        <h1>Dashboard</h1>
-      </div>
+    <div className="flex w-full h-full p-8 items-center">
       <iframe
         title="Dashbord_Marketing"
         width="100%"
