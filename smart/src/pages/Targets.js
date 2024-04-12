@@ -1,87 +1,76 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/SidebarPage.css";
 import axios from "axios";
-import {Link, useNavigate} from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { Edit, TrushSquare } from "iconsax-react";
 
-export default function Targets(){
+export default function Targets() {
+  const [targets, setTargets] = useState([]);
+  useEffect(() => {
+    getTargets();
+  }, []);
 
-    const [targets, setTargets] = useState([]);
-    useEffect(() => {
-        getTargets();
-    }, []);
-  
-    function getTargets() {
-        axios.get('http://127.0.0.1:5000/listtarget').then(function(response) {
-            console.log(response.data);
-            setTargets(response.data);
+  function getTargets() {
+    axios.get("http://127.0.0.1:5000/listtarget").then(function (response) {
+      console.log(response.data);
+      setTargets(response.data);
+    });
+  }
+
+  // eslint-disable-next-line
+  const deleteTarget = (trimester, year) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this target?"
+    );
+    if (confirmDelete) {
+      axios
+        .delete(`http://127.0.0.1:5000/targetdelete/${trimester}/${year}`)
+        .then(function (response) {
+          console.log(response.data);
+          getTargets();
         });
+      alert("Successfully Deleted");
     }
-     
-    // eslint-disable-next-line
-    const deleteTarget = (trimester, year) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this target?");
-        if (confirmDelete) {
-            axios.delete(`http://127.0.0.1:5000/targetdelete/${trimester}/${year}`).then(function(response){
-                console.log(response.data);
-                getTargets();
-            });
-            alert("Successfully Deleted");
-        };
-    };
-
-
-    const navigate = useNavigate();
-    
-    const handleLogout = () => {
-        navigate('/');
-    };
-    
-
+  };
 
   return (
-    <div className="sidebar-page">
-      <nav className="sidebar">
-        <div className="logo">
-            <a href="/AdminPage">
-          <img src='https://brand.airbus.com/sites/g/files/jlcbta121/files/styles/airbus_480x480/public/2021-06/logo_black.webp?itok=aN5izIzH' alt="Logo" />
-          </a>
-        </div>
-        <ul>
-          <li><a href="/AdminPage">Dashboard</a></li>
-          <li><a href="/users">Users</a></li>
-          <li><a href="/targets">Targets</a></li>
-        </ul>
-        <button className="logout-btn" onClick={handleLogout}>Logout</button>
-      </nav>
-      <div className="content">
-      <div className="col-12">
-                    <p><Link to="/addtarget" className="btn btn-success">Add New Target</Link> </p>
-                    <h1>Targets</h1>
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Quarter</th>
-                                <th>Year</th>
-                                <th>Target</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {targets.map((target_, key) =>
-                                <tr key={key}>
-                                    <td>{target_.trimestre}</td>
-                                    <td>{target_.year}</td>
-                                    <td>{target_.target}</td>
-                                    <td>
-                                        <Link to={`/targetupdate/${target_.trimestre}/${target_.year}`} className="btn btn-success" style={{marginRight: "10px"}}>Edit</Link>
-                                        <button onClick={() => deleteTarget(target_.trimestre, target_.year)} className="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <div className="flex flex-col gap-8">
+      <button className="w-fit border text-green border-green rounded p-2 mt-4 hover:bg-green hover:text-white hover:opacity-80">
+        <Link to="/addtarget">Add New Target</Link>
+      </button>
+      <table className="table-auto">
+        <thead>
+          <tr>
+            <th className="px-4 py-2">Quarter</th>
+            <th className="px-4 py-2">Year</th>
+            <th className="px-4 py-2">Target</th>
+            <th className="px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {targets.map((target_, key) => (
+            <tr key={key}>
+              <td className="px-4 py-2 text-center">{target_.trimestre}</td>
+              <td className="px-4 py-2 text-center">{target_.year}</td>
+              <td className="px-4 py-2 text-center">{target_.target}</td>
+              <td className="px-4 py-2 text-center">
+                <Link
+                  to={`/targetupdate/${target_.trimestre}/${target_.year}`}
+                  className="bg-primary-500 hover:bg-primary-400 text-white font-bold py-2 px-4 rounded mr-2"
+                >
+                  edit
+                </Link>
+                <button
+                  onClick={() => deleteTarget(target_.trimestre, target_.year)}
+                  className="bg-pink hover:bg-red text-white font-bold py-2 px-4 rounded"
+                >
+                  delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-};
+}
