@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -12,13 +12,15 @@ import AddTarget from "./pages/AddTarget.js";
 import EditUser from "./pages/EditUser.js";
 import EditTarget from "./pages/EditTarget.js";
 import Layout from "./Layout/Layout.jsx";
-import { UserContext, UserProvider } from "./context/User.js";
+import UserContext from "./context/User.js";
 
 function App() {
-  const { user } = useContext(UserContext);
+  const [user, setUser] = useState(null);
+
   return (
     <div className="vh-100">
-      <UserProvider>
+
+      <UserContext.Provider value={{setUser, user}}>
         <BrowserRouter>
           <Routes>
             <Route
@@ -29,7 +31,8 @@ function App() {
                 </Layout>
               }
             />
-            {user.role !== "" && (
+            {
+              user !== "" &&
               <Route
                 path="/consultant"
                 element={
@@ -38,8 +41,9 @@ function App() {
                   </Layout>
                 }
               />
-            )}
-            {user.role === "admin" && (
+            }
+            {
+              user === "admin" &&
               <>
                 <Route
                   path="/adminpage"
@@ -98,10 +102,10 @@ function App() {
                   }
                 />
               </>
-            )}
+            }
           </Routes>
         </BrowserRouter>
-      </UserProvider>
+      </UserContext.Provider>
     </div>
   );
 }

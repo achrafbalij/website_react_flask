@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const AdminPage = () => {
+
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -34,16 +36,10 @@ const AdminPage = () => {
   };
 
   return (
-    <div className="flex w-full h-full p-8 items-center">
-      <iframe
-        title="Dashbord_Marketing"
-        width="100%"
-        height="100%"
-        src="https://app.powerbi.com/reportEmbed?reportId=2a8724f0-921b-4887-8f65-0a4f7f566029&autoAuth=true&ctid=35c1785d-3361-4341-a29e-fc685e52b8a5"
-        frameborder="0"
-        allowFullScreen="true"
-      ></iframe>
+    <div className="flex w-full h-full p-8 items-center justify-center">
+      <iframe title="smart_1_2_3_4_new_data11" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=71d0ce95-599b-4fa0-ad98-ead5ed7d6d75&autoAuth=true&ctid=35c1785d-3361-4341-a29e-fc685e52b8a5" frameborder="0" allowFullScreen="true"></iframe>
     </div>
+    
   );
 };
 

@@ -1,6 +1,6 @@
 import { CloseSquare, Logout } from "iconsax-react";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SideNav = ({ paths, showSideNav, setShowSideNav }) => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const SideNav = ({ paths, showSideNav, setShowSideNav }) => {
   };
 
   return (
-    <div className="flex flex-col gap-8 bg-lighsilver w-96 p-8">
+    <div className="flex flex-col gap-8 bg-lighsilver max-w-96 min-w-96 p-8">
       <div className="flex items-center justify-between">
         <img
           src={require("../img/Airbus_Logo_2017.svg.png")}
@@ -26,8 +26,8 @@ const SideNav = ({ paths, showSideNav, setShowSideNav }) => {
       <ul className="mt-8 gap-8 flex flex-col">
         {paths.map((item, index) => (
           <li key={index}>
-            <a
-              href={item.path}
+            <Link
+              to={item.path}
               className={
                 window.location.pathname === item.path
                   ? "text-lg rounded-xl bg-primary-500 font-bold flex gap-4 flex-row items-center text-white p-4"
@@ -36,7 +36,7 @@ const SideNav = ({ paths, showSideNav, setShowSideNav }) => {
             >
               {item.icon}
               {item.name}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/User";
+import UserContext from "../context/User";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setName, setRole } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -25,13 +25,11 @@ export default function LoginPage() {
           console.log(response);
           //console.log(response.data);
           if (response.data.is_admin === true) {
-            setRole("admin");
-            setName(response.data.name);
-            navigate("/AdminPage");
+            setUser('admin');
+            navigate("/adminpage");
           } else {
-            setRole("consultant");
-            setName(response.data.name);
-            navigate("/ConsultantPage");
+            setUser('consultant');
+            navigate("/consultant");
           }
         })
         .catch(function (error) {

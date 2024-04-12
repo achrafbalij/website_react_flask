@@ -42,16 +42,16 @@ export default function Users() {
         <thead>
           <tr>
             <th className="py-2">Email</th>
-            <th className="py-2">Admin</th>
+            <th className="py-2">Role</th>
             <th className="py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user, key) => (
             <tr key={key}>
-              <td className="py-2">{user.email}</td>
-              <td className="py-2">{user.fullAccess}</td>
-              <td className="py-2">
+              <td className="py-2 text-blue-500 text-center">{user.email}</td>
+              <td className="py-2 text-blue-500 text-center">{user.fullAccess ? "Admin": "Consultant"}</td>
+              <td className="py-2 text-center">
                 <Link
                   to={`/userupdate/${user.email}`}
                   className="mr-2 text-blue-500"

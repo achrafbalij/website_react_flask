@@ -7,23 +7,18 @@ import {
   SecurityUser,
   StatusUp,
 } from "iconsax-react";
-import { UserContext } from "../context/User";
+import UserContext from "../context/User";
 
 const Layout = ({ children }) => {
   const { user } = useContext(UserContext);
   const [showSideNav, setShowSideNav] = useState(true);
   const paths =
-    user.role === "admin"
+    user === "admin"
       ? [
           {
             name: "Admin",
             path: "/adminpage",
             icon: <SecurityUser className="w-6 h-6" />,
-          },
-          {
-            name: "Consultant",
-            path: "/consultant",
-            icon: <MessageQuestion className="w-6 h-6" />,
           },
           {
             name: "Users",
@@ -70,7 +65,7 @@ const Layout = ({ children }) => {
             )}
             <h1 className="text-2xl font-bold text-white">
               {window.location.pathname === "/adminpage"
-                ? "Dashboard"
+                ? <a target="_blank" href="https://app.powerbi.com/groups/ecd3748e-7b50-4f15-81df-52b8fcd10e07/reports/71d0ce95-599b-4fa0-ad98-ead5ed7d6d75/ReportSectionf9685674a3100970d013?experience=power-bi"> Dashboard </a>
                 : window.location.pathname === "/consultant"
                 ? "Consultant"
                 : window.location.pathname === "/users"
@@ -85,11 +80,6 @@ const Layout = ({ children }) => {
                 ? "Edit User"
                 : ""}
             </h1>
-            <img
-              className="m-1 w-16 h-16 rounded-full bg-white"
-              alt="Profile"
-              src={`https://ui-avatars.com/api/?name=${user.name}&size=128&background=random`}
-            />
             {/* Replace with your profile circle image */}
           </div>
         )}

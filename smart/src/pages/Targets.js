@@ -50,21 +50,21 @@ export default function Targets() {
         <tbody>
           {targets.map((target_, key) => (
             <tr key={key}>
-              <td className="border px-4 py-2">{target_.trimestre}</td>
-              <td className="border px-4 py-2">{target_.year}</td>
-              <td className="border px-4 py-2">{target_.target}</td>
-              <td className="border px-4 py-2">
+              <td className="px-4 py-2 text-center">{target_.trimestre}</td>
+              <td className="px-4 py-2 text-center">{target_.year}</td>
+              <td className="px-4 py-2 text-center">{target_.target}</td>
+              <td className="px-4 py-2 text-center">
                 <Link
                   to={`/targetupdate/${target_.trimestre}/${target_.year}`}
                   className="bg-primary-500 hover:bg-primary-400 text-white font-bold py-2 px-4 rounded mr-2"
                 >
-                  <Edit className="w-6 h-6" />
+                  edit
                 </Link>
                 <button
                   onClick={() => deleteTarget(target_.trimestre, target_.year)}
                   className="bg-pink hover:bg-red text-white font-bold py-2 px-4 rounded"
                 >
-                  <TrushSquare className="w-6 h-6" />
+                  delete
                 </button>
               </td>
             </tr>
