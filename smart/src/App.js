@@ -29,8 +29,7 @@ function App() {
                 </Layout>
               }
             />
-            {
-              // user.role !== "" &&
+            {user.role !== "" && (
               <Route
                 path="/consultant"
                 element={
@@ -39,9 +38,8 @@ function App() {
                   </Layout>
                 }
               />
-            }
-            {
-              // user.role === "admin" &&
+            )}
+            {user.role === "admin" && (
               <>
                 <Route
                   path="/adminpage"
@@ -100,7 +98,7 @@ function App() {
                   }
                 />
               </>
-            }
+            )}
           </Routes>
         </BrowserRouter>
       </UserProvider>
